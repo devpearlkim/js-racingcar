@@ -1,1 +1,1 @@
-export const TOTAL_ROUND = 5;
+export const TOTAL_ROUNDS = 5;

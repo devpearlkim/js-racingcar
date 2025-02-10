@@ -1,8 +1,9 @@
 import { printCars, printRoundResults } from '../../ui/output.js';
 import { validateCarNames } from '../../validation.js';
 import { Car } from '../models/Car.js';
+import { Race } from '../models/Race.js';
 
-export function startRace(carNames, TOTAL_ROUND) {
+export function startRace(carNames, TOTAL_ROUNDS) {
   try {
     validateCarNames(carNames);
   } catch (error) {
@@ -11,19 +12,13 @@ export function startRace(carNames, TOTAL_ROUND) {
   }
 
   const cars = carNames.map((name) => new Car(name));
-  printCars(cars);
 
-  let round = 1;
+  const race = new Race(cars, TOTAL_ROUNDS);
 
-  while (round <= TOTAL_ROUND) {
-    progressRound(cars, round);
-    round += 1;
+  printCars(race.cars);
+
+  while (race.hasNextRound()) {
+    race.progressRound();
+    printRoundResults(race);
   }
-}
-
-export function progressRound(cars, round) {
-  console.log(`\nRound ${round}:`);
-
-  cars.forEach((car) => car.move());
-  printRoundResults(cars);
 }

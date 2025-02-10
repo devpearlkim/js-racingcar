@@ -1,6 +1,6 @@
-import { TOTAL_ROUND } from './constants.js';
-import { startGame } from './core/services/race.js';
+import { startRace } from './core/services/race.js';
 import readLineAsync from './utils/readLineAsync.js';
+import { TOTAL_ROUNDS } from './constants.js';
 
 // 입출력 예시
 async function play() {
@@ -9,7 +9,7 @@ async function play() {
   );
   const carNames = input.split(',').map((name) => name.trim());
 
-  startGame(carNames, TOTAL_ROUND);
+  startRace(carNames, TOTAL_ROUNDS);
 }
 
 play();
