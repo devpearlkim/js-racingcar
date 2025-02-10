@@ -2,7 +2,7 @@ import { printCars, printRoundResults } from '../../ui/output.js';
 import { validateCarNames } from '../../validation.js';
 import { Car } from '../models/Car.js';
 
-export function startGame(carNames, TOTAL_ROUND) {
+export function startRace(carNames, TOTAL_ROUND) {
   try {
     validateCarNames(carNames);
   } catch (error) {
@@ -16,12 +16,12 @@ export function startGame(carNames, TOTAL_ROUND) {
   let round = 1;
 
   while (round <= TOTAL_ROUND) {
-    playRound(cars, round);
+    progressRound(cars, round);
     round += 1;
   }
 }
 
-export function playRound(cars, round) {
+export function progressRound(cars, round) {
   console.log(`\nRound ${round}:`);
 
   cars.forEach((car) => car.move());
