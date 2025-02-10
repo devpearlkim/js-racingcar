@@ -1,5 +1,3 @@
-import { TOTAL_ROUNDS } from '../../constants.js';
-
 export class Race {
   cars;
   totalRounds;

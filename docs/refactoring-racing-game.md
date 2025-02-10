@@ -48,7 +48,25 @@ export function progressRound(cars, round) {
 #### **After:**
 
 ```javascript
-export class Race {}
+export class Race {
+  cars;
+  totalRounds;
+  currentRound = 1;
+
+  constructor(cars, rounds) {
+    this.cars = cars;
+    this.totalRounds = rounds;
+  }
+
+  hasNextRound() {
+    return this.currentRound <= this.totalRounds;
+  }
+
+  progressRound() {
+    this.cars.forEach((car) => car.move());
+    this.currentRound += 1;
+  }
+}
 ```
 
 🚀 **Why?**
