@@ -41,7 +41,7 @@ export function progressRound(cars, round) {
   console.log(`\nRound ${round}:`);
 
   cars.forEach((car) => car.move());
-  printRoundResults(cars);
+  printRoundProgress(cars);
 }
 ```
 
