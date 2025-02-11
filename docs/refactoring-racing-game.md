@@ -5,7 +5,7 @@
 Before refactoring, the code had several issues:
 
 - **❌ Domain logic & UI were not separated** → `console.log` was inside `Race` logic.
-- **❌ Race logic was not separated, and progressRound directly called car.move()** -> encapsulating the logic in a Race class.
+- **❌ Race logic was not separated, and runRound directly called car.move()** -> encapsulating the logic in a Race class.
 - **❌ `Car` instances were created inside `Race`** → Bad for dependency management.
 - **❌ No centralized error handling** → Errors stopped execution without proper handling.
 
@@ -32,12 +32,12 @@ export function startRace(carNames, TOTAL_ROUND) {
   const cars = carNames.map((name) => new Car(name));
   let round = 1;
   while (round <= TOTAL_ROUND) {
-    progressRound(cars, round);
+    runRound(cars, round);
     round += 1;
   }
 }
 
-export function progressRound(cars, round) {
+export function runRound(cars, round) {
   console.log(`\nRound ${round}:`);
 
   cars.forEach((car) => car.move());
@@ -62,7 +62,7 @@ export class Race {
     return this.currentRound <= this.totalRounds;
   }
 
-  progressRound() {
+  runRound() {
     this.cars.forEach((car) => car.move());
     this.currentRound += 1;
   }
@@ -72,7 +72,6 @@ export class Race {
 🚀 **Why?**
 
 - Now **Race logic is encapsulated** inside the `Race` class.
-- We no longer create `Car` instances inside `Race` (dependency injection).
 
 ---
 

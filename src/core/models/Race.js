@@ -16,8 +16,17 @@ export class Race {
     return this.currentRound <= this.totalRounds;
   }
 
-  progressRound() {
+  runRound() {
     this.cars.forEach((car) => car.move());
+    const roundSummary = {
+      round: this.currentRound,
+      cars: this.cars.map((car) => ({
+        name: car.name,
+        position: car.position,
+      })),
+    };
+
     this.currentRound += 1;
+    return roundSummary;
   }
 }
