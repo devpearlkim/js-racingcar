@@ -75,6 +75,71 @@ export class Race {
 
 ---
 
+### **Step 2: Separated UI and Domain Logic** 🎨
+
+#### **Before:**
+
+```javascript
+export function startRace(carNames, totalRounds) {
+  const cars = carNames.map((name) => new Car(name));
+  const race = new Race(cars, totalRounds);
+
+  printCarNames(race.cars);
+
+  while (race.hasNextRound()) {
+    race.runRound();
+    printRoundProgress(race.cars);
+  }
+}
+```
+
+#### **After:**
+
+```javascript
+export class Race {
+  runRound() {
+    this.cars.forEach((car) => car.move());
+    const roundSummary = {
+      round: this.currentRound,
+      cars: this.cars.map((car) => ({
+        name: car.name,
+        position: car.position,
+      })),
+    };
+
+    this.currentRound += 1;
+    return roundSummary;
+  }
+}
+```
+
+```javascript
+export const RaceView = {
+  printCarNames(cars) {},
+
+  drawTrack(position) {},
+
+  printRoundProgress(roundSummary) {},
+};
+```
+
+```javascript
+export function startRace(carNames, totalRounds, view) {
+  while (race.hasNextRound()) {
+    const roundResult = race.runRound();
+    view.printRoundProgress(roundResult);
+  }
+}
+```
+
+🚀 **Why?**
+
+- Race class now returns roundSummary, ensuring the domain logic doesn’t directly handle UI.
+- startRace() now injects the UI dependency (RaceView), enabling better flexibility and testability.
+- Achieved a separation of concerns between UI and business logic.
+
+---
+
 ## 4️⃣ Results: Before vs. After
 
 | Before (❌ Bad)     | After (✅ Good)           |
@@ -98,5 +163,6 @@ export class Race {
 To track changes, see these commits:
 
 - 🔗 **[Initial Code](https://github.com/devpearlkim/js-racingcar/commit/fdc54cee65d1ffb9ee24e05e2ae0968d352edc45)**
-- 🔗 **[Refactored `Race` Class]()**
-- 🔗 **[Separated UI Logic]()**
+- 🔗 **[Add `Race` Class](https://github.com/devpearlkim/js-racingcar/commit/e920bc8a06e0b1e3d98857c07c92a6eb012ceabd)**
+- 🔗 **[Refactored `Race` Class](https://github.com/devpearlkim/js-racingcar/commit/cb3ccbf233a671b43b84ff4f1820d3dac5411b98)**
+- 🔗 **[Separated UI Logic](https://github.com/devpearlkim/js-racingcar/commit/2d91a51a0728606d4632d514cd3fe9b7376a7927)**
