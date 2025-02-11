@@ -1,4 +1,4 @@
-import { Car } from '../../../main';
+import { Car } from '../src/core/models/Car';
 
 const name = 'jinju';
 
