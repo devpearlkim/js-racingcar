@@ -1,15 +1,14 @@
-import { printCarNames, printRoundProgress } from '../../ui/output.js';
 import { Car } from '../models/Car.js';
 import { Race } from '../models/Race.js';
 
-export function startRace(carNames, totalRounds) {
+export function startRace(carNames, totalRounds, view) {
   const cars = carNames.map((name) => new Car(name));
   const race = new Race(cars, totalRounds);
 
-  printCarNames(race.cars);
+  view.printCarNames(race.cars);
 
   while (race.hasNextRound()) {
     const roundResult = race.runRound();
-    printRoundProgress(roundResult);
+    view.printRoundProgress(roundResult);
   }
 }

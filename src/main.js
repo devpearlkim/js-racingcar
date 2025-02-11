@@ -2,6 +2,7 @@ import { startRace } from './core/services/race.js';
 import readLineAsync from './utils/readLineAsync.js';
 import { TOTAL_ROUNDS } from './constants.js';
 import { validateCarNames } from './validation.js';
+import { RaceView } from './ui/output.js';
 
 // 입출력 예시
 async function play() {
@@ -17,7 +18,7 @@ async function play() {
     return;
   }
 
-  startRace(carNames, TOTAL_ROUNDS);
+  startRace(carNames, TOTAL_ROUNDS, RaceView);
 }
 
 play();
