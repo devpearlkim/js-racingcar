@@ -4,13 +4,13 @@ export const RaceView = {
   },
 
   drawTrack(position) {
-    return '-'.repeat(position);
+    return '-'.repeat(Math.max(1, position));
   },
 
   printRoundProgress(roundResult) {
     console.log(`\nRound ${roundResult.round}:`);
     roundResult.cars.forEach((car) => {
-      console.log(`${car.name}: ${this.drawTrack(car.position)}`);
+      console.table(`${car.name}: ${this.drawTrack(car.position)}`);
     });
   },
 };
