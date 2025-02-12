@@ -6,19 +6,18 @@ import { RaceView } from './ui/output.js';
 
 // 입출력 예시
 async function play() {
-  const input = await readLineAsync(
-    '자동차 이름을 입력하세요 (쉼표로 구분해주세요) > '
-  );
-  const carNames = input.split(',').map((name) => name.trim());
-
   try {
+    const input = await readLineAsync(
+      '자동차 이름을 입력하세요 (쉼표로 구분해주세요) > '
+    );
+    const carNames = input.split(',').map((name) => name.trim());
+
     validateCarNames(carNames);
+
+    startRace(carNames, TOTAL_ROUNDS, RaceView);
   } catch (error) {
     console.error(error.message);
-    return;
   }
-
-  startRace(carNames, TOTAL_ROUNDS, RaceView);
 }
 
 play();
