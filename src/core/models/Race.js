@@ -8,6 +8,14 @@ export class Race {
       throw new Error('At least one car must be provided');
     }
 
+    if (
+      typeof rounds !== 'number' ||
+      rounds <= 0 ||
+      !Number.isInteger(rounds)
+    ) {
+      throw new Error('Rounds must be a positive integer');
+    }
+
     this.cars = cars;
     this.totalRounds = rounds;
   }

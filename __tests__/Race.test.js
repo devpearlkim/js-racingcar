@@ -40,6 +40,21 @@ describe('Race Class', () => {
         'At least one car must be provided'
       );
     });
+
+    test('should throw an error if rounds is not a positive integer', () => {
+      expect(() => new Race(cars, -1)).toThrow(
+        'Rounds must be a positive integer'
+      );
+      expect(() => new Race(cars, 0)).toThrow(
+        'Rounds must be a positive integer'
+      );
+      expect(() => new Race(cars, 'five')).toThrow(
+        'Rounds must be a positive integer'
+      );
+      expect(() => new Race(cars, 1.1)).toThrow(
+        'Rounds must be a positive integer'
+      );
+    });
   });
 
   describe('Race Progression', () => {
