@@ -8,13 +8,14 @@ jest.mock('../src/core/models/Race.js');
 describe('RaceController', () => {
   let mockView;
   let raceController;
-  const CAR_NAMES = ['jinju', 'grace']; // 매직 넘버 제거
+  const CAR_NAMES = ['jinju', 'grace'];
   const TOTAL_ROUNDS = 3;
 
   beforeEach(() => {
     mockView = {
       printCarNames: jest.fn(),
       printRoundProgress: jest.fn(),
+      printWinners: jest.fn(),
     };
     raceController = new RaceController(mockView);
   });
@@ -38,6 +39,7 @@ describe('RaceController', () => {
         .mockReturnValueOnce(true)
         .mockReturnValueOnce(false),
       runRound: jest.fn().mockReturnValue('MockRoundResult'),
+      getWinners: jest.fn().mockReturnValue(['jinju']),
     };
 
     raceController.race = mockRaceInstance;
@@ -51,6 +53,8 @@ describe('RaceController', () => {
 
     expect(mockView.printRoundProgress).toHaveBeenCalledTimes(TOTAL_ROUNDS);
     expect(mockView.printRoundProgress).toHaveBeenCalledWith('MockRoundResult');
+
+    expect(mockView.printWinners).toHaveBeenCalledWith(['jinju']);
   });
 
   test('runRace() should throw an error if race is not initialized', () => {

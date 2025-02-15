@@ -22,5 +22,8 @@ export class RaceController {
       const roundResult = this.race.runRound();
       this.view.printRoundProgress(roundResult);
     }
+
+    const winners = this.race.getWinners();
+    this.view.printWinners(winners);
   }
 }

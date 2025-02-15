@@ -41,4 +41,11 @@ export class Race {
   generateRandomNumber() {
     return Math.floor(Math.random() * 10);
   }
+
+  getWinners() {
+    const maxPosition = Math.max(...this.cars.map((car) => car.position));
+    return this.cars
+      .filter((car) => car.position === maxPosition)
+      .map((car) => car.name);
+  }
 }
