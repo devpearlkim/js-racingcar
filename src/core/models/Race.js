@@ -17,7 +17,7 @@ export class Race {
   }
 
   runRound() {
-    this.cars.forEach((car) => car.move());
+    this.cars.forEach((car) => car.move(this.generateRandomNumber()));
     const roundSummary = {
       round: this.currentRound,
       cars: this.cars.map((car) => ({
@@ -28,5 +28,9 @@ export class Race {
 
     this.currentRound += 1;
     return roundSummary;
+  }
+
+  generateRandomNumber() {
+    return Math.floor(Math.random() * 10);
   }
 }
