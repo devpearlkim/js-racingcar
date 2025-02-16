@@ -20,9 +20,17 @@ export class RaceController {
 
     while (this.race.hasNextRound()) {
       const roundResult = this.race.runRound();
-      this.view.printRoundProgress(roundResult);
+      this.updateUI(roundResult);
     }
 
+    this.showWinners();
+  }
+
+  updateUI(roundResult) {
+    this.view.printRoundProgress(roundResult);
+  }
+
+  showWinners() {
     const winners = this.race.getWinners();
     this.view.printWinners(winners);
   }

@@ -30,6 +30,7 @@ describe('RaceController', () => {
 
     expect(mockView.printCarNames).toHaveBeenCalled();
   });
+
   test('runRace() should call printRoundProgress for each round', () => {
     const mockRaceInstance = {
       hasNextRound: jest
